@@ -15,7 +15,7 @@
     "inlineSources": true,
     "alwaysStrict": true,
     "outDir": "./dist",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": ["test", "./src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

@@ -1,6 +1,5 @@
-import * as express from 'express';
-import { NextFunction, Request, Response } from 'express';
-import * as cors from 'cors';
+import express, { NextFunction, Request, Response } from 'express';
+import cors from 'cors';
 import RoutesConfig from './infra/adapter/http/routes/RoutesConfig';
 import FeatureApplicationFactory from './infra/factory/FeatureApplicationFactory';
 import FeatureHttpAdapter from './infra/adapter/http/FeatureHttpAdapter';

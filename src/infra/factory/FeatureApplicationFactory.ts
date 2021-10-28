@@ -5,23 +5,23 @@ import DisableFeature from '../../application/Feature/DisableFeature';
 import GetFeature from '../../application/Feature/GetFeature';
 
 export default class FeatureApplicationFactory {
-    getFeature(): GetFeature {
+  getFeature(): GetFeature {
+    const repository = new FeatureRepositoryMemory();
+    return new GetFeature(repository);
+  }
+
+  createFeature(): CreateFeature {
       const repository = new FeatureRepositoryMemory();
-      return new GetFeature(repository);
-    }
+      return new CreateFeature(repository);
+  }
 
-    createFeature(): CreateFeature {
-        const repository = new FeatureRepositoryMemory();
-        return new CreateFeature(repository);
-    }
+  enableFeature(): EnableFeature {
+      const repository = new FeatureRepositoryMemory();
+      return new EnableFeature(repository);
+  }
 
-    enableFeature(): EnableFeature {
-        const repository = new FeatureRepositoryMemory();
-        return new EnableFeature(repository);
-    }
-
-    disableFeature(): DisableFeature {
-        const repository = new FeatureRepositoryMemory();
-        return new DisableFeature(repository);
-    }
+  disableFeature(): DisableFeature {
+      const repository = new FeatureRepositoryMemory();
+      return new DisableFeature(repository);
+  }
 }
