@@ -1,28 +1,34 @@
-import { NextFunction, Request, Response } from "express";
-import FeatureApplicationFactory from '../../../factory/FeatureApplicationFactory';
+import { Request, Response } from "express";
+import FeatureApplicationFactory from "../../factory/FeatureApplicationFactory";
 
 export default class FeatureHttpAdapter {
-    applicationFactory: FeatureApplicationFactory;
+  applicationFactory: FeatureApplicationFactory;
 
-    constructor(applicationFactory: FeatureApplicationFactory) {
-        this.applicationFactory = applicationFactory;
-    }
+  constructor(applicationFactory: FeatureApplicationFactory) {
+    this.applicationFactory = applicationFactory;
+  }
 
-    public async create(request: Request, response: Response, next: NextFunction) {
-        const input = { name: request.body.name, state: request.body.state };
-        await this.applicationFactory.createFeature().handle({ ...input });
-        return response.send({ message: 'Feature created' });
-    }
+  public async getByName(request: Request, response: Response) {
+    const name = request.params.name;
+    const feature = await this.applicationFactory.getFeature().handle({ name });
+    return response.send({ name: feature.name, state: feature.state });
+  }
 
-    public async enableFeature(request: Request, response: Response, next: NextFunction) {
-        const input = { name: request.body.name };
-        await this.applicationFactory.enableFeature().handle({ ...input });
-        return response.send({ message: 'Feature enabled' });
-    }
+  public async create(request: Request, response: Response) {
+    const input = { name: request.body.name, state: request.body.state };
+    await this.applicationFactory.createFeature().handle({ ...input });
+    return response.send({ message: 'Feature created' });
+  }
 
-    public async disableFeature(request: Request, response: Response, next: NextFunction) {
-        const input = { name: request.body.name };
-        await this.applicationFactory.disableFeature().handle({ ...input });
-        return response.send({ message: 'Feature disabled' });
-    }
+  public async enableFeature(request: Request, response: Response) {
+    const input = { name: request.body.name };
+    await this.applicationFactory.enableFeature().handle({ ...input });
+    return response.send({ message: 'Feature enabled' });
+  }
+
+  public async disableFeature(request: Request, response: Response) {
+    const input = { name: request.body.name };
+    await this.applicationFactory.disableFeature().handle({ ...input });
+    return response.send({ message: 'Feature disabled' });
+  }
 }
