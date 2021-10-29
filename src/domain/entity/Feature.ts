@@ -1,9 +1,9 @@
 export default class Feature {
-    name: string;
-    state: boolean;
+  key: string;
+  state: boolean;
 
-    constructor ({ name, state }: {name: string, state: boolean }) {
-        this.name = name;
-        this.state = state;
-    }
+  constructor ({ key, state }: {key: string, state: boolean }) {
+    this.key = key;
+    this.state = state;
+  }
 }

@@ -8,13 +8,13 @@ export default class GetFeature {
     this.featureRepository = featureRepository;
   }
 
-  public async handle({ name }: { name: string }): Promise<{ name: string, state: boolean }> {
-    const feature = await this.featureRepository.getByName(name);
+  public async handle({ key }: { key: string }): Promise<{ key: string, state: boolean }> {
+    const feature = await this.featureRepository.getByName(key);
     if (!feature) {
       throw new DataNotFoundException('Feature not found');
     }
     return {
-      name: feature.name,
+      key: feature.key,
       state: feature.state
     };
   }

@@ -8,13 +8,13 @@ export default class DisableFeature {
     this.featureRepository = featureRepository;
   }
 
-  public async handle({ name}: { name: string }) {
-    const exists = await this.featureRepository.getByName(name);
+  public async handle({ key}: { key: string }) {
+    const exists = await this.featureRepository.getByName(key);
     if (!exists) {
         throw new Error('Feature not found');
     }
     const state = false
-    const feature = new Feature({name, state});
+    const feature = new Feature({key, state});
     await this.featureRepository.update(feature)
   }
 }

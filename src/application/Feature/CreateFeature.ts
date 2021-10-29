@@ -8,12 +8,12 @@ export default class CreateFeature {
     this.featureRepository = featureRepository;
   }
 
-  public async handle({ name, state}: { name: string, state: boolean }) {
-    const exists = await this.featureRepository.getByName(name);
+  public async handle({ key, state}: { key: string, state: boolean }) {
+    const exists = await this.featureRepository.getByName(key);
     if (exists) {
         throw new Error('Feature already exists');
     }
-    const feature = new Feature({name, state});
+    const feature = new Feature({key, state});
     await this.featureRepository.save(feature)
   }
 }
